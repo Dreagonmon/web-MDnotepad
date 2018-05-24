@@ -1,5 +1,6 @@
 # web-MDnotepad
 A web based markdown notepad for all platform
+[Preview Here](https://dreagonmon.github.io/web-MDnotepad/)
 
 ### Features
 -   Read local file in many encodings
