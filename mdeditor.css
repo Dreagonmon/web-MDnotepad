@@ -1,0 +1,176 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	width: 100%;
+	height: 100%;
+}
+
+/*菜单栏*/
+.me_menubar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: auto;
+	height: 2em;
+	line-height: 2em;
+	background: #ffffff;
+	border-left: solid 1px #00A0FF;
+	border-right: solid 1px #00A0FF;
+	z-index: 999;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-select: none;
+}
+.me_menuclass, .me_menudecoding {
+	height: 2em;
+	width: 4em;
+	text-align: center;
+	line-height: 2em;
+	float: left;
+	overflow: overlay;
+}
+.me_menulist {
+	display: none;
+	position: fixed;
+	z-index: 999;
+	list-style: none;
+	width: 8em;
+	background-color: #FFFFFF;
+	border: solid 1px #00A0FF;
+	border-radius: 0.5em 0.5em 1em 1em;
+	margin: 0;
+	padding: 0;
+}
+.me_menufile {
+	display: none;
+}
+#me_decoding {
+	width: 4em;
+	left: 0;
+	right: 0px;
+	height: auto;
+	font-size: 1em;
+	text-align: center;
+	border: 0;
+	border-radius: 0.25em 0.25em 0.25em 0.25em;
+}
+.me_menunwin {
+	width: 2em;
+	height: 2em;
+	float: left;
+	font-size: 1em;
+	text-align: center;
+}
+.me_menufname {
+	width: auto;
+	height: 2em;
+	margin-left: 18em;
+	left: 18em;
+	right: 0;
+	background: 0 0;
+}
+#me_filename {
+	width: 100%;
+	font-size: 1em;
+	text-align: center;
+	right: 0;
+	border: 0;
+	border-radius: 0.25em 0.25em 0.25em 0.25em;
+}
+/*编辑器*/
+.CodeMirror {
+	padding-top: 0;
+	border: 0;
+}
+.editor-toolbar:hover {
+	opacity: 1;
+}
+.editor-toolbar {
+	top: 2em;
+	left: 0;
+	right: 0;
+	position: fixed;
+	width: auto;
+	z-index: 500;
+	background-color: #FFFFFF;
+	opacity: 1;
+	border: 0;
+	border-radius: 0;
+	border-left: solid 1px #00A0FF;
+	border-right: solid 1px #00A0FF;
+	border-bottom: solid 1px #00A0FF;
+	border-bottom-left-radius: 1em;
+	border-bottom-right-radius: 1em;
+}
+.editor-toolbar:before, .editor-toolbar:after {
+	margin: 0;
+}
+
+#me_toast_frame {
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	overflow: hidden;
+	display: none;
+}
+#me_toast_text {
+	position: relative;
+	max-width: 16em;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1em;
+	height: 2.5em;
+	line-height: 2.5em;
+	background-color: #FFFFFF;
+	border-bottom: solid 1px #00A0FF;
+	border-bottom-left-radius: 1em;
+	border-bottom-right-radius: 1em;
+}
+.CodeMirror-cursor {
+	border-left-width: 0.1em;
+}
+/*暗色主题*/
+.dark, .dark *{
+	color: #E0E0E0;
+	/*transition-duration: 2000ms;*/
+}
+.dark, .dark .me_menubar, .dark .me_menulist, .dark input , .dark .editor-toolbar, .dark .CodeMirror, .dark #me_toast_text, .dark .editor-preview, .editor-preview-side {
+	background-color: #000000;
+}
+.dark .me_menubar, .dark .editor-toolbar, .dark #me_toast_text, .dark .me_menulist{
+	border-color: #0080A0;
+}
+.dark .editor-toolbar a{
+	color: #E0E0E0;
+}
+.dark .editor-toolbar a:hover, .dark .editor-toolbar a.active{
+	background-color: #202020;
+}
+.dark .editor-toolbar.disabled-for-preview a:not(.no-disable){
+	color: #404040;
+	background-color: #000000;
+}
+.dark .CodeMirror-cursor {
+	border-color: #00FFFF;
+}
+.dark .CodeMirror-selectedtext, .dark .CodeMirror-focused .CodeMirror-selected, .dark .CodeMirror-line::selection, .dark .CodeMirror-line>span::selection, .dark .CodeMirror-line>span>span::selection{
+	background-color: #008080;
+}
+
+@media only screen and (max-width: 640px) {
+	.me_menubar {
+		height: 4em;
+	}
+	.editor-toolbar {
+		top: 4em;
+	}
+	.me_menufname {
+		top: 2em;
+		margin-left: 2em;
+		margin-right: 2em;
+	}
+}

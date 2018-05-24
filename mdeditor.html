@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="css/simplemde.min.css" />
+		<link rel="stylesheet" href="mdeditor.css" />
+		<script type="text/javascript" src="js/zepto.min.js" ></script>
+		<script type="text/javascript" src="js/simplemde.min.js" ></script>
+		<script>
+			window.TextEncoder = window.TextDecoder = null;
+		</script>
+		<script type="text/javascript" src="js/encoding-indexes.js" ></script>
+		<script type="text/javascript" src="js/encoding.js" ></script>
+		<script type="text/javascript" src="js/FileSaver.js" ></script>
+		<script type="text/javascript" src="mdeditor.js" ></script>
+		<title>在线Markdown编辑器</title>
+	</head>
+	<body>
+		<!--Menu-->
+		<div class="me_menubar">
+			<div class="me_menuclass">
+				<span>文件</span>
+				<ul class="me_menulist">
+					<li class="me_menuitem" onclick="mnew()">新建文本</li>
+					<li class="me_menuitem" onclick="mopen()">打开文本</li>
+					<li class="me_menuitem" onclick="mreopen()">重载最近文件</li>
+					<li class="me_menuitem" onclick="msave()">保存</li>
+					<li class="me_menuitem" onclick="mtmpsave()">临时保存</li>
+					<li class="me_menuitem" onclick="mtmpload()">读取临时文本</li>
+				</ul>
+			</div>
+			<div class="me_menuclass">
+				<span>编辑</span>
+				<ul class="me_menulist">
+					<li class="me_menuitem" onclick="mundo()">撤销 Ctrl+Z</li>
+					<li class="me_menuitem" onclick="mredo()">重做 Ctrl+Y</li>
+					<li class="me_menuitem" onclick="mtheme()">切换主题</li>
+				</ul>
+			</div>
+			<div class="me_menuclass">
+				<span>编码</span>
+				<ul class="me_menulist">
+					<li class="me_menuitem" onclick="mdecoding($(this).text())">GBK</li>
+					<li class="me_menuitem" onclick="mdecoding($(this).text())">BIG5</li>
+					<li class="me_menuitem" onclick="mdecoding($(this).text())">UTF-8</li>
+					<li class="me_menuitem" onclick="minputdecoding()">自定义编码</li>
+				</ul>
+			</div>
+			<div class="me_menufile">
+				<input id="me_selectfile" type="file" />
+			</div>
+			<div class="me_menudecoding">
+				<input id="me_decoding" type="text" value="UTF-8"/>
+			</div>
+			<div class="me_menunwin" onclick="mnwindow()">
+				<span>↗</span>
+			</div>
+			<div class="me_menufname">
+				<input id="me_filename" type="text" value="" placeholder="请输入文档名称" onchange="changedTitle()"/>
+			</div>
+		</div>
+		<div>
+			<textarea id="me_editor"></textarea>
+			<div id="me_toast_frame">
+				<p id="me_toast_text">Toast!</p>
+			</div>
+		</div>
+	</body>
+</html>
