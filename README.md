@@ -16,5 +16,5 @@ A web based markdown notepad for all platform
 
 # this application based on some library below:
 -   [SimpleMDE](https://simplemde.com)
--   [FileSaver.js](https://eligrey.com/blog/saving-generated-files-on-the-client-side/)
+-   [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
 -   [text-encoding](https://github.com/inexorabletash/text-encoding)
