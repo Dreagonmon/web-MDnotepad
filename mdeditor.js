@@ -11,6 +11,7 @@ function addWindowLoadEvent(func) {
 	}
 }
 
+/*生成编辑器*/
 var mde;
 function init(){
 	mde = new SimpleMDE({
@@ -102,6 +103,7 @@ function init(){
 	document.onkeydown = multiKey;
 	adjust();
 }
+/*调整页面元素大小*/
 function adjust(){
 	menubarOffset = $(".me_menubar").height();
 	toolbarOffset = $(".editor-toolbar").height();
@@ -109,6 +111,7 @@ function adjust(){
 	$("#me_toast_frame")[0].style.display = "none";
 	$(".CodeMirror")[0].style.top = (menubarOffset+toolbarOffset) + "px";
 }
+/*弹出菜单事件*/
 function toggleMenu(){
 	mlist = $(this).children(".me_menulist")[0];
 	if (mlist.style.display != "block"){
@@ -117,21 +120,25 @@ function toggleMenu(){
 		mlist.style.display = "none";
 	}
 }
+/*浮动通知框*/
 function toast(msg){
 	$("#me_toast_text")[0].innerText = msg;
 	$("#me_toast_frame")[0].style.display = "block";
 	setTimeout(function(){$("#me_toast_frame")[0].style.display = "none";},2000);
 }
 addWindowLoadEvent(init);
+/*自动存档事件*/
 function autosave(){
 	localStorage.setItem("lastSave",mde.value());
 	localStorage.setItem("lastCoding",$("#me_decoding")[0].value);
 	localStorage.setItem("lastName",$("#me_filename")[0].value);
 	localStorage.setItem("lastTheme",$("body")[0].className);
 }
+/*自动改变标题*/
 function changedTitle(){
 	document.title = $("#me_filename")[0].value;
 }
+//自定义快捷键
 function multiKey(e){
 	ctrlKey = e.ctrlKey || e.metaKey;
 	//Ctrl + S Save
@@ -152,8 +159,10 @@ res_str_ifopen = "是否打开新文件? 当前修改不会被保存!";
 res_str_ifcnew = "是否创建新文件? 当前修改不会被保存!";
 res_str_icoding = "请输入自定义的编码名称:";
 res_str_winname = "Markdown编辑器";
+res_str_cantreopen = "未选择过文件，无法重新打开!";
 res_str_loads = "加载成功!";
 res_str_saves = "保存成功!";
+/*新建文本*/
 function mnew(){
 	if (confirm(res_str_ifcnew)){
 		mde.value("");
@@ -161,6 +170,7 @@ function mnew(){
 		changedTitle();
 	}
 }
+/*读取本地文件*/
 var readyToRead = false;
 function onFileSelected(){
 	if (readyToRead){
@@ -168,7 +178,13 @@ function onFileSelected(){
 		fr = new FileReader();
 		fr.onload = onFileReaded;
 		fr.readAsText($(this)[0].files[0],$("#me_decoding")[0].value);
-		$("#me_filename")[0].value = $(this)[0].files[0].name;
+		//如果文件后缀名是.md，则标题不显示后缀
+		fname = $(this)[0].files[0].name;
+		fext = fname.substr(fname.length-3,3);
+		if (fext.toLowerCase() == ".md")
+			$("#me_filename")[0].value = fname.substr(0,fname.length-3);
+		else
+			$("#me_filename")[0].value = fname;
 		changedTitle();
 	}
 }
@@ -182,8 +198,12 @@ function mopen(){
 		readyToRead = true;
 	}
 }
+/*重新打开文件*/
 function mreopen(){
 	file = $("#me_selectfile")[0].files[0];
+	if (file == undefined){
+		toast(res_str_cantreopen);
+	}
 	if (file != undefined && confirm(res_str_ifropen)){
 		fr = new FileReader();
 		fr.onload = onFileReaded;
@@ -192,12 +212,14 @@ function mreopen(){
 		changedTitle();
 	}
 }
+/*临时保存*/
 function mtmpsave(){
 	localStorage.setItem("tmpSave",mde.value());
 	localStorage.setItem("tmpCoding",$("#me_decoding")[0].value);
 	localStorage.setItem("tmpName",$("#me_filename")[0].value);
 	toast(res_str_saves);
 }
+/*读取临时保存*/
 function mtmpload(){
 	if (localStorage.getItem("tmpSave")!=undefined){
 		mde.value(localStorage.getItem("tmpSave"));
@@ -211,12 +233,14 @@ function mtmpload(){
 	}
 	toast(res_str_loads);
 }
+/*撤消，重做*/
 function mundo(){
 	mde.undo();
 }
 function mredo(){
 	mde.redo();
 }
+/*设置编码*/
 function mdecoding(coding){
 	oldcoding = $("#me_decoding")[0].value;
 	$("#me_decoding")[0].value = coding;
@@ -227,6 +251,7 @@ function minputdecoding(){
 		mdecoding(coding);
 	}
 }
+/*保存文本文件到本地*/
 function msave(){
 	datastr = mde.value();
 	if (confirm(res_str_ifwinn)){
@@ -234,11 +259,13 @@ function msave(){
 	}
 	dataarray = new TextEncoder($("#me_decoding")[0].value.toLowerCase(), { NONSTANDARD_allowLegacyEncoding: true }).encode(datastr);
 	blob = new Blob([dataarray],{type:"text/plain;charset="+$("#me_decoding")[0].value.toLowerCase()});
-	saveAs(blob,$("#me_filename")[0].value);
+	saveAs(blob,$("#me_filename")[0].value+'.md');
 }
+/*桌面端新窗口打开，便于调整窗口大小*/
 function mnwindow(){
 	window.open(window.location,res_str_winname,'height=640,width=480,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=yes,location=no,status=no')
 }
+/*切换主题，主题通过css定义*/
 function mtheme(){
 	body = $("body")[0];
 	if (body.className == "dark"){

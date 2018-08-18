@@ -1,10 +1,18 @@
-* {
+body {
 	margin: 0;
 	padding: 0;
-}
-body {
 	width: 100%;
 	height: 100%;
+}
+/*滚动条*/
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+    border-width: 0;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 4px;
 }
 
 /*菜单栏*/
@@ -81,10 +89,15 @@ body {
 	border: 0;
 	border-radius: 0.25em 0.25em 0.25em 0.25em;
 }
+
 /*编辑器*/
-.CodeMirror {
+.CodeMirror, .editor-preview {
 	padding-top: 0;
+	padding-bottom: 0;
 	border: 0;
+}
+.CodeMirror-cursor {
+	border-left-width: 0.1em;
 }
 .editor-toolbar:hover {
 	opacity: 1;
@@ -110,6 +123,7 @@ body {
 	margin: 0;
 }
 
+/*提示框样式*/
 #me_toast_frame {
 	position: fixed;
 	z-index: 999;
@@ -130,11 +144,37 @@ body {
 	border-bottom-left-radius: 1em;
 	border-bottom-right-radius: 1em;
 }
-.CodeMirror-cursor {
-	border-left-width: 0.1em;
+
+
+/*默认主题*/
+.CodeMirror .CodeMirror-code .cm-comment {
+	background-color: transparent;
 }
+.editor-preview, .editor-preview-side, ::-webkit-scrollbar {
+	background-color: #FFFFFF;
+}
+.editor-toolbar.disabled-for-preview a:not(.no-disable){
+	color: #A0A0A0;
+}
+.editor-toolbar a:hover {
+	background-color: #F0F0F0;
+}
+::-webkit-scrollbar {
+	background-color: #FFFFFF;
+}
+::-webkit-scrollbar-track
+{
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb
+{
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: rgba(0,160,255,.3);
+}
+
 /*暗色主题*/
-.dark, .dark *{
+.dark, .dark *:not(a){
 	color: #E0E0E0;
 	/*transition-duration: 2000ms;*/
 }
@@ -142,25 +182,37 @@ body {
 	background-color: #000000;
 }
 .dark .me_menubar, .dark .editor-toolbar, .dark #me_toast_text, .dark .me_menulist{
-	border-color: #0080A0;
+	border-color: #00A0FF;
 }
 .dark .editor-toolbar a{
 	color: #E0E0E0;
 }
-.dark .editor-toolbar a:hover, .dark .editor-toolbar a.active{
-	background-color: #202020;
+.dark .editor-toolbar a:hover, .dark .editor-toolbar a.active, .dark .editor-preview pre, .dark .editor-preview-side pre{
+	background-color: #404040;
 }
 .dark .editor-toolbar.disabled-for-preview a:not(.no-disable){
-	color: #404040;
+	color: #808080;
 	background-color: #000000;
 }
 .dark .CodeMirror-cursor {
 	border-color: #00FFFF;
 }
-.dark .CodeMirror-selectedtext, .dark .CodeMirror-focused .CodeMirror-selected, .dark .CodeMirror-line::selection, .dark .CodeMirror-line>span::selection, .dark .CodeMirror-line>span>span::selection{
+.dark .CodeMirror-selected,.dark .CodeMirror-selectedtext , .dark .CodeMirror-line::selection, .dark .CodeMirror-line span::selection {
 	background-color: #008080;
 }
+.dark::-webkit-scrollbar {
+	background-color: #000000;
+}
+.dark::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
+    background-color: transparent;
+}
+.dark::-webkit-scrollbar-thumb{
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.7);
+    background-color: rgba(0,160,255,.7);
+}
 
+/*移动端样式*/
 @media only screen and (max-width: 640px) {
 	.me_menubar {
 		height: 4em;
@@ -172,5 +224,8 @@ body {
 		top: 2em;
 		margin-left: 2em;
 		margin-right: 2em;
+	}
+	.me_menunwin {
+		display: none;
 	}
 }
